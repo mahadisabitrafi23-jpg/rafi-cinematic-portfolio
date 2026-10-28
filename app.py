@@ -1,4 +1,5 @@
 from importlib import import_module
+from pathlib import Path
 
 try:
   st = import_module("streamlit")
@@ -16,7 +17,7 @@ except ModuleNotFoundError as exc:
 # ------------------------------------------------------------
 
 st.set_page_config(
-    page_title="Rafi — Selected Work",
+    page_title="Mahadi Sabit Rafi — Selected Work",
     page_icon="◒",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -24,14 +25,14 @@ st.set_page_config(
 
 # Edit these details to personalize your site.
 NAME = "Mahadi Sabit Rafi"
-ROLE = "STUDENT · CREATIVE EXPLORER · DEVELOPER IN PROGRESS"
+ROLE = "INDEPENDENT ARTIST & INNOVATOR"
+CURRENTLY = "STUDENT · DEVELOPER IN PROGRESS · LYRIC WRITER"
 EMAIL = "hello@example.com"  # Replace with your real email.
 LOCATION = "Dhaka, Bangladesh"
-INTRO = (
-    "I’m interested in the space where technology, design, sound, "
-    "and storytelling meet. I make things, learn in public, and follow "
-    "ideas until they become something real."
-)
+INTRO = "An unfinished story. An uncommon mind."
+
+# Add your portrait at assets/profile.jpg (inside this project folder).
+PROFILE_IMAGE = Path(__file__).parent / "assets" / "profile.jpg"
 
 st.markdown("""
 <style>
@@ -64,7 +65,9 @@ div[data-testid="stVerticalBlock"] > div { gap: .75rem; }
 .hero { padding:80px 0 58px; }
 .hero h1 { font-family:'Playfair Display',serif !important; font-weight:400 !important; font-size:clamp(3.6rem,9vw,8rem) !important; letter-spacing:-.065em !important; line-height:.91 !important; margin:20px 0 26px !important; }
 .hero h1 em { color:var(--olive); font-weight:400; }
-.hero-copy { color:#c2bdb2; font-size:1.05rem; max-width:560px; }
+.hero-copy { color:#c2bdb2; font-size:1.05rem; max-width:680px; }
+.hero-subtitle { font-family:'Playfair Display',serif; color:var(--olive); font-size:clamp(1.25rem,2.4vw,2rem); margin:0 0 18px; }
+.about-quote { font-family:'Playfair Display',serif; color:var(--paper); font-size:1.25rem; font-style:italic; margin-top:20px; }
 .hero-meta { border-left:1px solid var(--line); padding:15px 0 15px 22px; margin-top:25px; }
 .hero-meta strong { color:var(--paper); font-weight:500; }
 .rule { border:0; border-top:1px solid var(--line); margin:26px 0; }
@@ -79,6 +82,10 @@ div[data-testid="stVerticalBlock"] > div { gap: .75rem; }
 .statement { font-family:'Playfair Display',serif; font-size:clamp(1.7rem,3.6vw,3rem); line-height:1.32; letter-spacing:-.035em; color:var(--paper); }
 .statement em { color:var(--olive); font-weight:400; }
 .about-copy { color:#b9b3a8; max-width:620px; }
+.about-photo-note { color:var(--muted); font-family:'DM Mono',monospace; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; text-align:center; padding-top:10px; }
+div[data-testid="stImage"] img { border-radius:2px; filter:grayscale(12%); }
+.about-photo-placeholder { min-height:390px; height:100%; display:flex; flex-direction:column; justify-content:space-between; padding:22px; border:1px solid var(--line); background:linear-gradient(145deg,#24241f,#151512); color:var(--muted); font-family:'DM Mono',monospace; font-size:.7rem; letter-spacing:.1em; }
+.about-photo-placeholder .placeholder-mark { font-family:'Playfair Display',serif; font-size:5rem; color:var(--olive); line-height:1; align-self:center; margin:auto 0; }
 .skill-row { padding:14px 0; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; gap:20px; }
 .skill-row span:first-child { color:var(--paper); }
 .skill-row span:last-child { font-family:'DM Mono',monospace; color:var(--muted); font-size:.7rem; text-align:right; }
@@ -101,20 +108,34 @@ div[data-testid="stVerticalBlock"] > div { gap: .75rem; }
 
 st.markdown("""
 <div class="topbar">
-  <div class="wordmark">rafi<span>.</span></div>
+  <div class="wordmark">Mahadi Sabit Rafi<span>.</span></div>
   <div class="topright">INDEPENDENT MIND · DHAKA, BD</div>
-  <div class="mono">PORTFOLIO / 2026</div>
 </div>
 """, unsafe_allow_html=True)
 
-# HERO
-st.markdown(f"""
-<div class="hero">
-  <div class="kicker">A personal archive of ideas &amp; experiments</div>
-  <h1>Curiosity<br>made <em>visible.</em></h1>
-  <p class="hero-copy">{INTRO}</p>
-</div>
-""", unsafe_allow_html=True)
+# HERO — portrait appears at the top of the homepage, beside the main introduction
+hero_photo, hero_intro = st.columns([0.72, 1.28], gap="large", vertical_alignment="center")
+with hero_photo:
+    if PROFILE_IMAGE.is_file():
+        st.image(str(PROFILE_IMAGE), use_container_width=True)
+        st.markdown('<div class="about-photo-note">MAHADI SABIT RAFI · PORTRAIT</div>', unsafe_allow_html=True)
+    else:
+        st.markdown("""
+        <div class="about-photo-placeholder" style="min-height:420px;">
+          <span>PORTRAIT / 01</span>
+          <span class="placeholder-mark">r.</span>
+          <span>ADD YOUR PHOTO TO<br>assets/profile.jpg</span>
+        </div>
+        """, unsafe_allow_html=True)
+with hero_intro:
+    st.markdown(f"""
+    <div class="hero" style="padding:35px 0 25px;">
+      <div class="kicker">Independent Mind · Dhaka, BD</div>
+      <h1>Mahadi Sabit<br><em>Rafi.</em></h1>
+      <p class="hero-subtitle">An unfinished story. An uncommon mind.</p>
+      <p class="hero-copy">Drawn to the obscure, driven by the impossible.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 hero_left, hero_right = st.columns([1.3, .7], gap="large")
 with hero_left:
@@ -122,8 +143,10 @@ with hero_left:
 with hero_right:
     st.markdown(f"""
     <div class="hero-meta">
+      <div class="mono">IDENTITY</div>
+      <p><strong>{ROLE}</strong></p>
       <div class="mono">CURRENTLY</div>
-      <p><strong>{ROLE.title()}</strong></p>
+      <p><strong>{CURRENTLY}</strong></p>
       <div class="mono">BASED IN</div>
       <p><strong>{LOCATION}</strong></p>
     </div>
@@ -136,24 +159,15 @@ st.markdown("""
   <div class="section-number">01 — ABOUT</div>
 </div>
 """, unsafe_allow_html=True)
-a, b = st.columns([1.05, .95], gap="large")
-with a:
-    st.markdown("""
-    <div class="statement">
-      I’m drawn to things that make people <em>feel</em>, think, or see the world a little differently.
-    </div>
-    """, unsafe_allow_html=True)
-with b:
-    st.markdown("""
-    <p class="about-copy">
-    I’m a student building skills one project at a time. My interests move between programming,
-    visual design, music, and storytelling. I believe a good portfolio should show not only finished
-    work, but also the curiosity and process behind it.
-    </p>
-    <p class="about-copy">
-    This site is a living document. As I learn, experiment, and make better things, it will grow with me.
-    </p>
-    """, unsafe_allow_html=True)
+st.markdown("""
+<div class="statement">An unfinished story.<br><em>An uncommon mind.</em></div>
+<div style="height:18px;"></div>
+<p class="about-copy">Drawn to the obscure, driven by the impossible.</p>
+<p class="about-copy">I exist somewhere between art and innovation, where unconventional ideas meet quiet ambition. Music, technology, and the beauty of things that don't need to be understood by everyone — that's my world.</p>
+<p class="about-copy">I don't chase attention. I build things worth noticing.</p>
+<p class="about-copy">Still evolving. Always observing. Never revealing the whole picture.</p>
+<p class="about-quote">Some things are better left unexplained.</p>
+""", unsafe_allow_html=True)
 
 # SELECTED WORK
 st.markdown("""
@@ -212,15 +226,15 @@ st.markdown("""
 skills_left, skills_right = st.columns(2, gap="large")
 with skills_left:
     st.markdown("""
-    <div class="skill-row"><span>Python programming</span><span>LEARNING</span></div>
-    <div class="skill-row"><span>Visual design</span><span>EXPLORING</span></div>
+    <div class="skill-row"><span>Python &amp; creative coding</span><span>LEARNING</span></div>
+    <div class="skill-row"><span>Visual design &amp; art direction</span><span>EXPLORING</span></div>
     <div class="skill-row"><span>Digital storytelling</span><span>EXPLORING</span></div>
     """, unsafe_allow_html=True)
 with skills_right:
     st.markdown("""
-    <div class="skill-row"><span>Content &amp; music projects</span><span>IN PROGRESS</span></div>
-    <div class="skill-row"><span>German language</span><span>A1 JOURNEY</span></div>
-    <div class="skill-row"><span>Learning by building</span><span>ALWAYS ON</span></div>
+    <div class="skill-row"><span>Lyrics &amp; songwriting</span><span>IN PROGRESS</span></div>
+    <div class="skill-row"><span>Car enthusiast</span><span>PASSION</span></div>
+    <div class="skill-row"><span>Learning about perfumes</span><span>EXPLORING</span></div>
     """, unsafe_allow_html=True)
 
 # CONTACT
