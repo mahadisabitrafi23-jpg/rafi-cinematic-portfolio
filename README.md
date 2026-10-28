@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Rafi — Cinematic Editorial Portfolio
 
 A Python-powered portfolio site built with Streamlit. The interface is styled with CSS embedded in `app.py`; no React or JavaScript is required.
@@ -36,3 +37,6 @@ Check the deployed website and test the email link on both desktop and mobile.
 - This is a portfolio starter, not a finished professional biography. Replace all sample projects with your actual work before sharing it.
 - The Google Fonts import requires internet access; fallback fonts will be used if it cannot load.
 - A free hosting service may sleep or have usage limits depending on its current policy.
+=======
+# rafi-cinematic-portfolio
+>>>>>>> f33d60d240bff7ebeed0dac63836cc8ff630cf82
