@@ -25,11 +25,11 @@ st.set_page_config(
 
 # Edit these details to personalize your site.
 NAME = "Mahadi Sabit Rafi"
-ROLE = "INDEPENDENT ARTIST & INNOVATOR"
+ROLE = "INDEPENDENT ARTIST & OPEN THINKER"
 CURRENTLY = "STUDENT · DEVELOPER IN PROGRESS · LYRIC WRITER"
-EMAIL = "hello@example.com"  # Replace with your real email.
-LOCATION = "Dhaka, Bangladesh"
-INTRO = "An unfinished story. An uncommon mind."
+EMAIL = "mahadisabitrafi23@gmail.com"  
+LOCATION = "Faridpur, Dhaka, Bangladesh"
+INTRO = "An unfinished story. An artistically obsessed mind."
 
 # Add your portrait at assets/profile.jpg (inside this project folder).
 PROFILE_IMAGE = Path(__file__).parent / "assets" / "profile.jpg"
